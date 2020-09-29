@@ -14,6 +14,18 @@
       <a href="{% url 'create' %}"><h1>CREATE</h1></a>
       <h1>✨</h1>
       <img class="dslion" src="{% static 'likelionds.png' %}" alt="" />
+      <!--로그인-->
+      {% if request.user.is_authenticated %}
+        <a href="javascript:{document.getElementById('logout').submit()}">
+        <h1>LOGOUT</h1>
+        </a>
+        <form id="logout" method="POST" action="{% url 'logout' %}">
+        {% csrf_token %} 
+        <input type="hidden" />
+        </form>
+        {% else %}
+        <a href="{% url 'login'%}"><h1>LOGIN</h1></a>
+        {% endif%}
     </header>
     <section>{% block content %} {% endblock %}</section>
     <footer>
